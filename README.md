@@ -26,7 +26,7 @@ Features ✨
 
 ***
 
-#Tech Stack 🛠️
+Tech Stack 🛠️
 
 * **Backend**: Python, Flask
 * **Frontend**: HTML5, CSS3 (with variables for theming), Vanilla JavaScript
@@ -89,7 +89,7 @@ Make sure you have the following installed on your system:
 
 ***
 
-#Author ✍️
+Author ✍️
 
 **Akash Doss**
 
