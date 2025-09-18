@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GemTalk</title>
+  <style>
+    /* CSS Color Variables for Theming */
+    :root {
+      --bg-color: #f5f7fa;
+      --text-color: #333;
+      --header-bg-color: #f1f1f1;
+      --chat-bg-color: #ffffff;
+      --input-bg-color: #ffffff;
+      --input-border-color: #ccc;
+      --primary-accent: #667eea;
+      --primary-accent-hover: #5a6bdf;
+      --bot-msg-bg: #e5e5ea;
+      --bot-msg-text: #000;
+      --user-msg-bg: #667eea;
+      --user-msg-text: #fff;
+      --link-color: #667eea;
+      --splash-gradient: linear-gradient(135deg, #667eea, #764ba2);
+      --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark-mode {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --header-bg-color: #1e1e1e;
+      --chat-bg-color: #181818;
+      --input-bg-color: #2c2c2c;
+      --input-border-color: #444;
+      --primary-accent: #7a8efb;
+      --primary-accent-hover: #8a9fff;
+      --bot-msg-bg: #333333;
+      --bot-msg-text: #e0e0e0;
+      --user-msg-bg: #7a8efb;
+      --user-msg-text: #121212;
+      --link-color: #8a9fff;
+      --splash-gradient: linear-gradient(135deg, #2c3e50, #4ca1af);
+      --shadow-color: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      margin: 0; 
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow: hidden; /* This prevents scrolling between pages */
+    }
+
+    /* Splash screen */
+    #splash {
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh;
+      background: var(--splash-gradient);
+      color: white; font-size: 3em; font-weight: bold;
+      animation: fadeOut 2s ease forwards;
+      animation-delay: 2s;
+    }
+    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
+    /* Landing Page */
+    #landingPage {
+      display: none; height: 100vh;
+      justify-content: center; align-items: center; flex-direction: column;
+      text-align: center; padding: 20px;
+    }
+    #landingPage h1 { font-size: 3.5em; margin-bottom: 10px; }
+    /* NEW Tagline Style */
+    #landingPage .tagline {
+      font-size: 1em;
+      font-style: italic;
+      opacity: 0.8;
+      margin: -10px 0 25px 0;
+    }
+    #landingPage .description {
+      font-size: 1.2em; color: var(--text-color);
+      max-width: 500px; margin-bottom: 30px; line-height: 1.6;
+    }
+    .creators { margin-top: 20px; font-size: 1em; }
+    .creators a {
+      color: var(--link-color);
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .creators a:hover { text-decoration: underline; }
+    
+    #enterButton {
+      padding: 12px 25px; border: none; background: var(--primary-accent);
+      color: white; border-radius: 8px; cursor: pointer; font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+    #enterButton:hover { background-color: var(--primary-accent-hover); }
+
+    /* API key page */
+    #apiPage {
+      display: none; height: 100vh;
+      justify-content: center; align-items: center; flex-direction: column;
+    }
+    #apiInput {
+      padding: 10px; width: 320px; border: 1px solid var(--input-border-color);
+      border-radius: 8px; font-size: 16px; background-color: var(--input-bg-color);
+      color: var(--text-color);
+    }
+    #apiButton {
+      margin-top: 10px; padding: 10px 20px; border: none;
+      background: var(--primary-accent); color: white; border-radius: 8px;
+      cursor: pointer; font-size: 16px;
+    }
+    
+    /* Loading bar */
+    #loading { display: none; width: 320px; height: 10px; background: #eee; border-radius: 5px; margin-top: 20px; overflow: hidden; }
+    #loading div { width: 0; height: 100%; background: var(--primary-accent); animation: loadAnim 2s linear forwards; }
+    @keyframes loadAnim { to { width: 100%; } }
+
+    /* Chat UI */
+    #chatPage { display: none; height: 100vh; display: flex; flex-direction: column; }
+    
+    #chatHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: var(--header-bg-color);
+        border-bottom: 1px solid var(--input-border-color);
+        box-shadow: 0 2px 5px var(--shadow-color);
+        transition: background-color 0.3s ease, border-bottom 0.3s ease;
+    }
+    #chatHeader h2 { margin: 0; font-size: 1.2em; }
+    #themeToggle {
+        background: none; border: none; cursor: pointer;
+        font-size: 1.8em; padding: 0;
+    }
+    
+    #chatBox {
+      flex: 1; padding: 20px; overflow-y: auto;
+      background-color: var(--chat-bg-color); font-size: 16px; line-height: 1.5;
+      transition: background-color 0.3s ease;
+    }
+    .msg {
+      max-width: 70%; margin: 10px; padding: 12px 16px;
+      border-radius: 18px; clear: both;
+    }
+    .user {
+      background: var(--user-msg-bg); color: var(--user-msg-text);
+      float: right; border-bottom-right-radius: 2px;
+    }
+    .bot {
+      background: var(--bot-msg-bg); color: var(--bot-msg-text);
+      float: left; border-bottom-left-radius: 2px;
+    }
+    #inputBar {
+      display: flex; padding: 12px; background-color: var(--header-bg-color);
+      transition: background-color 0.3s ease;
+    }
+    #userMessage {
+      flex: 1; padding: 12px; border: 1px solid var(--input-border-color);
+      border-radius: 8px; font-size: 16px; background-color: var(--input-bg-color);
+      color: var(--text-color); transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    #sendButton {
+      margin-left: 10px; padding: 12px 20px; border: none;
+      background: var(--primary-accent); color: white;
+      border-radius: 8px; cursor: pointer; font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="splash">GemTalk</div>
+
+  <div id="landingPage">
+    <h1>GemTalk</h1>
+    <p class="tagline">- Your friendly Chatbot with a temporary brain 🤣 -</p>
+    <p class="description">
+      A simple, privacy-focused chat interface to interact with Google's Gemini models. Your API key is never stored, ensuring your conversations remain private.
+    </p>
+    
+    <button id="enterButton">Get Started</button>
+     <div class="creators">
+        Created by: 
+        <!-- <a href="https://github.com/akashdoss" target="_blank" rel="noopener noreferrer">GitHub</a> | -->
+        <a href="https://www.linkedin.com/in/akash-selvadoss-n-542765252/" target="_blank" rel="noopener noreferrer">Akash Doss</a>
+    </div>
+  </div>
+
+  <div id="apiPage">
+    <h2>Enter Your Gemini API Key</h2>
+    <input type="text" id="apiInput" placeholder="API Key" autocomplete="off">
+    <button id="apiButton">Continue</button>
+    <div id="loading"><div></div></div>
+  </div>
+
+  <div id="chatPage">
+    <div id="chatHeader">
+        <h2>GemTalk</h2>
+        <button id="themeToggle">🌙</button>
+    </div>
+    <div id="chatBox"></div>
+    <div id="inputBar">
+      <input type="text" id="userMessage" placeholder="Type your message...">
+      <button id="sendButton">Send</button>
+    </div>
+  </div>
+
+  <script>
+    let apiKey = "";
+
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // --- Theme Switching Logic ---
+    const setTheme = (theme) => {
+      if (theme === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggle.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.classList.remove('dark-mode');
+        themeToggle.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      }
+    };
+
+    themeToggle.addEventListener('click', () => {
+      const isDarkMode = body.classList.contains('dark-mode');
+      setTheme(isDarkMode ? 'light' : 'dark');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(savedTheme);
+    });
+    // --- End of Theme Logic ---
+
+
+    // After splash, show the landing page
+    setTimeout(() => {
+      document.getElementById("splash").style.display = "none";
+      document.getElementById("landingPage").style.display = "flex";
+    }, 4000);
+
+    // Handle landing page button click
+    document.getElementById("enterButton").onclick = () => {
+      document.getElementById("landingPage").style.display = "none";
+      document.getElementById("apiPage").style.display = "flex";
+    };
+
+    // Handle API key submission
+    document.getElementById("apiButton").onclick = () => {
+      apiKey = document.getElementById("apiInput").value;
+      if (!apiKey) return alert("Please enter API Key");
+
+      document.getElementById("loading").style.display = "block";
+
+      setTimeout(() => {
+        document.getElementById("apiPage").style.display = "none";
+        document.getElementById("chatPage").style.display = "flex";
+        
+        const chatBox = document.getElementById("chatBox");
+        const welcomeMessage = "Welcome to GemTalk! I'm powered by Google's Gemini models. Feel free to ask me anything to get started.";
+        chatBox.innerHTML += `<div class="msg bot">${welcomeMessage}</div>`;
+      }, 2500);
+    };
+
+    // Handle sending a chat message
+    document.getElementById("sendButton").onclick = sendMessage;
+    document.getElementById("userMessage").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    async function sendMessage() {
+      const messageInput = document.getElementById("userMessage");
+      const message = messageInput.value.trim();
+      if (!message) return;
+
+      const chatBox = document.getElementById("chatBox");
+      messageInput.value = ""; 
+
+      chatBox.innerHTML += `<div class="msg user">${message}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+      
+      const thinkingMsg = document.createElement('div');
+      thinkingMsg.className = 'msg bot';
+      thinkingMsg.innerHTML = '<i>Thinking...</i>';
+      chatBox.appendChild(thinkingMsg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        const response = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ api_key: apiKey, message })
+        });
+
+        chatBox.removeChild(thinkingMsg);
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        chatBox.innerHTML += `<div class="msg bot">${data.reply}</div>`;
+
+      } catch (error) {
+        chatBox.removeChild(thinkingMsg);
+        chatBox.innerHTML += `<div class="msg bot">Error: ${error.message}</div>`;
+      }
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
