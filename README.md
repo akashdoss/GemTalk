@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
 </div>
 
-### - Your friendly Chatbot with a temporary brain 🤣 -
+# - Your friendly Chatbot with a temporary brain 🤣 -
 
 GemTalk is a sleek, simple, and privacy-focused web application that serves as a user-friendly interface for Google's Gemini models. It's a single-page application built with Flask and vanilla JavaScript, ensuring a lightweight and responsive user experience.
 
@@ -16,7 +16,7 @@ GemTalk is a sleek, simple, and privacy-focused web application that serves as a
 
 ***
 
-## ## Features ✨
+#Features ✨
 
 * **Direct Gemini API Integration**: Chat directly with Google's powerful `gemini-1.5-flash` model.
 * **Privacy First**: Your Gemini API key is handled exclusively on the client-side and is **never stored** on any server, ensuring your conversations remain private.
@@ -27,7 +27,7 @@ GemTalk is a sleek, simple, and privacy-focused web application that serves as a
 
 ***
 
-## ## Tech Stack 🛠️
+#Tech Stack 🛠️
 
 * **Backend**: Python, Flask
 * **Frontend**: HTML5, CSS3 (with variables for theming), Vanilla JavaScript
@@ -35,17 +35,17 @@ GemTalk is a sleek, simple, and privacy-focused web application that serves as a
 
 ***
 
-## ## Getting Started
+# Getting Started
 
 Follow these instructions to get a local copy up and running.
 
-### ### Prerequisites
+#Prerequisites
 
 Make sure you have the following installed on your system:
 * Python 3.9 or higher
 * pip (Python package installer)
 
-### ### Installation & Setup
+# Installation & Setup
 
 1.  **Clone the Repository**
     ```sh
@@ -81,7 +81,7 @@ Make sure you have the following installed on your system:
 
 ***
 
-## ## How to Use 🚀
+# How to Use 🚀
 
 1.  Upon launching the app, you'll see a welcome screen. Click **Get Started**.
 2.  Paste your Gemini API Key into the input field and click **Continue**.
@@ -90,7 +90,7 @@ Make sure you have the following installed on your system:
 
 ***
 
-## ## Author ✍️
+# Author ✍️
 
 **Akash Doss**
 
@@ -98,6 +98,6 @@ Make sure you have the following installed on your system:
 * **GitHub**: [@your-username](https://github.com/akashdoss)
     ***
 
-## ## License 📜
+#License 📜
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
