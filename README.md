@@ -11,7 +11,7 @@
 GemTalk is a sleek, simple, and privacy-focused web application that serves as a user-friendly interface for Google's Gemini models. It's a single-page application built with Flask and vanilla JavaScript, ensuring a lightweight and responsive user experience.
 
 <p align="center">
-  <img src="" alt="GemTalk Demo" width="80%">
+  <img src="https://gemtalk-theta.vercel.app/" alt="GemTalk Demo" width="80%">
 </p>
 
 ***
