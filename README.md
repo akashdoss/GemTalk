@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
 </div>
 
-# - Your friendly Chatbot with a temporary brain 🤣 -
+### - Your friendly Chatbot with a temporary brain 🤣 -
 
 GemTalk is a sleek, simple, and privacy-focused web application that serves as a user-friendly interface for Google's Gemini models. It's a single-page application built with Flask and vanilla JavaScript, ensuring a lightweight and responsive user experience.
 
@@ -90,12 +90,12 @@ Make sure you have the following installed on your system:
 
 ***
 
-# Author ✍️
+#Author ✍️
 
 **Akash Doss**
 
-* **LinkedIn**: [@akash-selvadoss-n-542765252](https://www.linkedin.com/in/akash-selvadoss-n-542765252/)
-* **GitHub**: [@your-username](https://github.com/akashdoss)
+* **LinkedIn**: [Akash Doss](https://www.linkedin.com/in/akash-selvadoss-n-542765252/)
+* **GitHub**: [Akash Doss](https://github.com/akashdoss)
     ***
 
 #License 📜
