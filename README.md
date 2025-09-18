@@ -1,4 +1,4 @@
-# GemTalk 💎
+# GemTalk  - Your friendly Chatbot with a temporary brain 🤣 -
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python" alt="Python Version">
@@ -6,7 +6,6 @@
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
 </div>
 
-### - Your friendly Chatbot with a temporary brain 🤣 -
 
 GemTalk is a sleek, simple, and privacy-focused web application that serves as a user-friendly interface for Google's Gemini models. It's a single-page application built with Flask and vanilla JavaScript, ensuring a lightweight and responsive user experience.
 
@@ -16,7 +15,7 @@ GemTalk is a sleek, simple, and privacy-focused web application that serves as a
 
 ***
 
-#Features ✨
+Features ✨
 
 * **Direct Gemini API Integration**: Chat directly with Google's powerful `gemini-1.5-flash` model.
 * **Privacy First**: Your Gemini API key is handled exclusively on the client-side and is **never stored** on any server, ensuring your conversations remain private.
